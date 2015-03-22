@@ -9,6 +9,8 @@ def index():
     card = Cards.query.first() 
     return card.Nname
     #return render_template('test.html')
+@app.route('/deck')
+def deckIndex():
 
 
 
