@@ -6,11 +6,11 @@ bootstrap = Bootstrap(app)
 
 @app.route('/')
 def index():
-    card = Cards.query.first() 
-    return card.Nname
+    cardInDeck  = Deck.query.join(Cards).first()
+    return cardInDeck.Nname
     #return render_template('test.html')
-@app.route('/deck')
-def deckIndex():
+#@app.route('/deck')
+#def deckIndex():
 
 
 
