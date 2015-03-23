@@ -26,12 +26,12 @@ def user():
     #    email = form.email.data
     #    form.email.data = ''
         flash('registration accepted')
-        #return redirect('/success')
+        return redirect('/success')
     return render_template('user.html', form=form )
 @app.route('/success')
 def regSuc():
     firstUser = Users.query.first()
-    return firstUser 
+    return firstUser.name
 
 
 
