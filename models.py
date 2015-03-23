@@ -8,6 +8,14 @@ app.config['SQLALCHEMY_DATABASE_URI'] = Secret.DB_URI
 db = SQLAlchemy(app)
 
 
+class Users(db.Model):
+    __tablename__ = "user"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Text)
+    #email = db.Column(db.Text)
+    def __repr__(self):
+        return '<Users %r>' % self.name
+
 class Cards(db.Model):
     __tablename__ = "Ncards"
     Nid = db.Column(db.Integer, primary_key=True)
