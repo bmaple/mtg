@@ -6,8 +6,9 @@ bootstrap = Bootstrap(app)
 
 @app.route('/')
 def index():
-    cardInDeck  = Decks.query.filter(Decks.cards.any(Decks.id=='1')).any()
-    return cardInDeck[0].Nname
+    card = Cards.query.first()
+    return card.Nname
+
     #return render_template('test.html')
 #@app.route('/deck')
 #def deckIndex():
