@@ -6,37 +6,29 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = Secret.DB_URI
 db = SQLAlchemy(app)
 
+class  DecksCards(db.Model):
+    __tablename__ = "DECKCARDS"
+    deck_id = db.Column(db.Integer, ForeignKey(decks.id), primary_key=True)
+    card_id = db.Column(db.Integer, ForeignKey(Cards.Nid), primary_key=True)
+    def __repr__(self):
+        return '<DECKCARDS %r>' % self.deck_id
 
 
-
-decksass = db.Table('DECKCARDS',
-        db.Column('deck_id', db.Integer, db.ForeignKey('decks.id')),
-        db.Column('card_id', db.Integer, db.ForeignKey('cards.Nid'))
-)
 class Cards(db.Model):
     __tablename__ = "Ncards"
     Nid = db.Column(db.Integer, primary_key = True)
     Nname = db.Column(db.Text)
+    decks = relationship(Decks, secondary='DecksCards')
     def __repr__(self):
         return '<Cards %r>' % self.Nname
 #deck table for a created deck
-class  Deck(db.Model):
+class  Decks(db.Model):
     __tablename__ = "DECKS"
     name = db.Column(db.Text, unique=True)
     id = db.Column(db.Integer, primary_key=True)
-    decksass = db.relationship('Cards', secondary=decksass,
-            backref=db.backref('decks', lazy='dynamic')) # may remove primary join
+    cards = relationship(Cards, secondary='DecksCards')
     def __repr__(self):
         return '<DECKS %r>' % self.name
-    """
-#storage table for what's in a person's deck
-class  DecksCards(db.Model):
-    __tablename__ = "DECKCARDS"
-    deck_id = db.Column(db.Integer)
-    card_id = db.Column(db.Integer)
-    def __repr__(self):
-        return '<DECKCARDS %r>' % self.deck_id
-        """
 """
 class Sets(db.Model):
     __tablename__ = "Nsets"
