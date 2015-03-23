@@ -30,8 +30,8 @@ def user():
     return render_template('user.html', form=form )
 @app.route('/success')
 def regSuc():
-    firstUser = Users.query.first()
-    return firstUser.name
+    users = Users.query.all()
+    return render_template('test.html', users=users)
 
 
 
