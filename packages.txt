@@ -2,3 +2,5 @@ python-flask-sqlalchemy
 python-mysqldb
 python-flask
 
+
+http://www.pythoncentral.io/sqlalchemy-association-tables/
