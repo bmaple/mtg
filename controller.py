@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory, flash
+from flask import Flask, render_template, send_from_directory, flash, redirect
 from flask.ext.bootstrap import Bootstrap
 from models import *
 from reg import *
@@ -19,14 +19,14 @@ def user():
     #email = None
     form = RegistrationForm()
     if form.validate_on_submit():
-        username = form.username.data
-        user = Users(username)
+        user = Users(name = form.username.data)
         form.username.data = ''
-        db_session.add(user)
+        db.session.add(user)
+        db.session.commit()
     #    email = form.email.data
     #    form.email.data = ''
         flash('registration accepted')
-        return redirect('/success')
+        #return redirect('/success')
     return render_template('user.html', form=form )
 @app.route('/success')
 def regSuc():
